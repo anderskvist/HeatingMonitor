@@ -22,8 +22,7 @@ void setup() {
   Wire.onRequest(requestEvent);
 }
 
-int analogReadMedian(int pin) {
-  int num = 21;
+int analogReadMedian(int pin, int num) {
   int samples[num];
 
   for(int i = 0; i < num; i++) {
@@ -32,13 +31,13 @@ int analogReadMedian(int pin) {
 
   isort(samples, num);
   
-  return samples[10];
+  return samples[num/2];
 }
 
 void loop() {
-  S1Value = analogReadMedian(S1);
-  S2Value = analogReadMedian(S2);
-  S3Value = analogReadMedian(S3);
+  S1Value = analogReadMedian(S1, 101);
+  S2Value = analogReadMedian(S2, 21);
+  S3Value = analogReadMedian(S3, 21);
   sprintf(output, "%4d;%4d;%4d", S1Value, S2Value, S3Value);
   Serial.println(output);
   delay(500);
