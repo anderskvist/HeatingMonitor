@@ -11,10 +11,12 @@ int S3Value = 0;
 char output[14];
 
 void setup() {
-  analogReference(DEFAULT);
+  analogReference(EXTERNAL);
   pinMode(A0, INPUT);
   pinMode(A1, INPUT);
   pinMode(A2, INPUT);
+
+  Serial.begin(9600);
 
   Wire.begin(8);
   Wire.onRequest(requestEvent);
@@ -38,6 +40,7 @@ void loop() {
   S2Value = analogReadMedian(S2);
   S3Value = analogReadMedian(S3);
   sprintf(output, "%4d;%4d;%4d", S1Value, S2Value, S3Value);
+  Serial.println(output);
   delay(500);
 }
 
