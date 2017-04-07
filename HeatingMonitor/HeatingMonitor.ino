@@ -151,8 +151,6 @@ void sendDataToInflux(String name, String data, boolean send) {
   preparedLine += line + "\n";
 
   if (send == true) {
-    preparedLine = "";
-    return;
     //Serial.println("Sending UDP packet...");
     udp.beginPacket(influxHost, influxPort);
     udp.print(preparedLine);
