@@ -76,13 +76,7 @@ void discoverOneWireDevices(void) {
 }
 
 float readSensor(DeviceAddress address) {
-  float temp = DS18B20.getTempC(address);
-
-//  Serial.print("Temperature: ");
-//  Serial.print(temp);
-//  Serial.println("C");
-
-  return temp;
+  return DS18B20.getTempC(address);
 }
 
 
