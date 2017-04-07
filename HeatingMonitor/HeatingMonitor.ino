@@ -104,8 +104,8 @@ void loop() {
   sendDataToInflux("FurnaceActive", (String) digitalRead(furnaceActivePin), false);
   sendDataToInflux("SolarActive", (String) digitalRead(solarPumpActivePin), false);
   sendDataToInflux("SolarTankPumpActive", (String) digitalRead(solarTankPumpActivePin), false);
-  sendDataToInflux("Available input 1", (String) digitalRead(avail1ActivePin), false);
-  sendDataToInflux("Available input 2", (String) digitalRead(avail2ActivePin), false);
+  sendDataToInflux("AvailInput4", (String) digitalRead(avail1ActivePin), false);
+  sendDataToInflux("AvailInput5", (String) digitalRead(avail2ActivePin), false);
 
   // D18B20 temperature sensors
   sendDataToInflux("SunForward", (String) readSensor(SunForward), false);
