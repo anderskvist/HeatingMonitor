@@ -93,28 +93,28 @@ void loop() {
   int SolarS2 = solarTemp.substring(4,8).toInt();
   int SolarS3 = solarTemp.substring(8,12).toInt();
 
-  sendDataToInflux(influxHost, 4446, "Test", (String) readSensor(Test), false);
+  sendDataToInflux(4446, "Test", (String) readSensor(Test), false);
   
   // Analog reads from Arduino via Wire
-  sendDataToInflux(influxHost, 4446, "SolarS1", (String) SolarS1, false);
-  sendDataToInflux(influxHost, 4446, "SolarS2", (String) SolarS2, false);
-  sendDataToInflux(influxHost, 4446, "SolarS3", (String) SolarS3, false);
+  sendDataToInflux(4446, "SolarS1", (String) SolarS1, false);
+  sendDataToInflux(4446, "SolarS2", (String) SolarS2, false);
+  sendDataToInflux(4446, "SolarS3", (String) SolarS3, false);
 
   // Digital reads from 230v to 3.3V PSU
-  sendDataToInflux(influxHost, 4446, "FurnaceActive", (String) digitalRead(furnaceActivePin), false);
-  sendDataToInflux(influxHost, 4446, "SolarActive", (String) digitalRead(solarPumpActivePin), false);
-  sendDataToInflux(influxHost, 4446, "SolarTankPumpActive", (String) digitalRead(solarTankPumpActivePin), false);
-  sendDataToInflux(influxHost, 4446, "Available input 1", (String) digitalRead(avail1ActivePin), false);
-  sendDataToInflux(influxHost, 4446, "Available input 2", (String) digitalRead(avail2ActivePin), false);
+  sendDataToInflux(4446, "FurnaceActive", (String) digitalRead(furnaceActivePin), false);
+  sendDataToInflux(4446, "SolarActive", (String) digitalRead(solarPumpActivePin), false);
+  sendDataToInflux(4446, "SolarTankPumpActive", (String) digitalRead(solarTankPumpActivePin), false);
+  sendDataToInflux(4446, "Available input 1", (String) digitalRead(avail1ActivePin), false);
+  sendDataToInflux(4446, "Available input 2", (String) digitalRead(avail2ActivePin), false);
 
   // D18B20 temperature sensors
-  sendDataToInflux(influxHost, 4446, "SunForward", (String) readSensor(SunForward), false);
-  sendDataToInflux(influxHost, 4446, "SunReturn", (String) readSensor(SunReturn), false);
-  sendDataToInflux(influxHost, 4446, "TankTop", (String) readSensor(TankTop), false);
-  sendDataToInflux(influxHost, 4446, "TankMiddle", (String) readSensor(TankMiddle), false);
-  sendDataToInflux(influxHost, 4446, "TankBottom", (String) readSensor(TankBottom), false);
-  sendDataToInflux(influxHost, 4446, "FurnaceForward", (String) readSensor(FurnaceForward), false);
-  sendDataToInflux(influxHost, 4446, "FurnaceReturn", (String) readSensor(FurnaceReturn), true);
+  sendDataToInflux(4446, "SunForward", (String) readSensor(SunForward), false);
+  sendDataToInflux(4446, "SunReturn", (String) readSensor(SunReturn), false);
+  sendDataToInflux(4446, "TankTop", (String) readSensor(TankTop), false);
+  sendDataToInflux(4446, "TankMiddle", (String) readSensor(TankMiddle), false);
+  sendDataToInflux(4446, "TankBottom", (String) readSensor(TankBottom), false);
+  sendDataToInflux(4446, "FurnaceForward", (String) readSensor(FurnaceForward), false);
+  sendDataToInflux(4446, "FurnaceReturn", (String) readSensor(FurnaceReturn), true);
 
   Serial.println("");
 
@@ -137,7 +137,7 @@ void connectWifi()
 
 String preparedLine = "";
 
-void sendDataToInflux(byte host[], int port, String name, String data, boolean send) {
+void sendDataToInflux(int port, String name, String data, boolean send) {
   // Avoid sending data if data is 85 (initializing)
   if (data == "85.00") {
     return;
@@ -154,7 +154,7 @@ void sendDataToInflux(byte host[], int port, String name, String data, boolean s
     preparedLine = "";
     return;
     //Serial.println("Sending UDP packet...");
-    udp.beginPacket(host, port);
+    udp.beginPacket(influxHost, port);
     udp.print(preparedLine);
     udp.endPacket();
     udp.stop();
