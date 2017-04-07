@@ -4,9 +4,9 @@ const int S1 = A0;
 const int S2 = A1;
 const int S3 = A2;
 
-int S1Value = 0;
-int S2Value = 0;
-int S3Value = 0;
+unsigned int S1Value = 0;
+unsigned int S2Value = 0;
+unsigned int S3Value = 0;
 
 char output[14];
 
@@ -22,7 +22,7 @@ void setup() {
   Wire.onRequest(requestEvent);
 }
 
-int analogReadMedian(int pin, int num) {
+unsigned int analogReadMedian(int pin, int num) {
   int samples[num];
 
   for(int i = 0; i < num; i++) {
@@ -39,8 +39,8 @@ void loop() {
   S1Value = analogReadMedian(S1, 101);
   S2Value = analogReadMedian(S2, 21);
   S3Value = analogReadMedian(S3, 21);
-  sprintf(output, "%4d;%4d;%4d", S1Value, S2Value, S3Value);
-  Serial.println(output);
+  sprintf(output, "%4d%4d%4d", S1Value, S2Value, S3Value);
+  //Serial.println(output);
   delay(500);
 }
 
