@@ -42,6 +42,12 @@ void setup() {
   Serial.begin(115200);
   connectWifi();
 
+  pinMode(furnaceActivePin, INPUT);
+  pinMode(solarPumpActivePin, INPUT);
+  pinMode(solarTankPumpActivePin, INPUT);
+  pinMode(avail4ActivePin, INPUT);
+  pinMode(avail5ActivePin, INPUT);
+
   discoverOneWireDevices();  
 }
 
