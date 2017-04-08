@@ -34,8 +34,8 @@ DeviceAddress Arduino = {0x28, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xA2};
 const int furnaceActivePin = 13;  // D7
 const int solarPumpActivePin = 12; // D6
 const int solarTankPumpActivePin =  14; // D5
-const int avail1ActivePin =  0; // D3
-const int avail2ActivePin =  16; // D0 (not connected)
+const int avail4ActivePin =  0; // D3
+const int avail5ActivePin =  16; // D0 (not connected)
 
 void setup() {
   Wire.begin();        // join i2c bus (address optional for master)
@@ -104,8 +104,8 @@ void loop() {
   sendDataToInflux("FurnaceActive", (String) digitalRead(furnaceActivePin), false);
   sendDataToInflux("SolarActive", (String) digitalRead(solarPumpActivePin), false);
   sendDataToInflux("SolarTankPumpActive", (String) digitalRead(solarTankPumpActivePin), false);
-  sendDataToInflux("AvailInput4", (String) digitalRead(avail1ActivePin), false);
-  sendDataToInflux("AvailInput5", (String) digitalRead(avail2ActivePin), false);
+  sendDataToInflux("AvailInput4", (String) digitalRead(avail4ActivePin), false);
+  sendDataToInflux("AvailInput5", (String) digitalRead(avail5ActivePin), false);
 
   // D18B20 temperature sensors
   sendDataToInflux("SunForward", (String) readSensor(SunForward), false);
