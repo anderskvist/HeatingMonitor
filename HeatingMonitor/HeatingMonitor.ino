@@ -34,7 +34,7 @@ DeviceAddress Arduino = {0x28, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xA2};
 const int furnaceActivePin = 13;  // D7
 const int solarPumpActivePin = 12; // D6
 const int solarTankPumpActivePin =  14; // D5
-const int avail4ActivePin =  0; // D3
+const int avail4ActivePin =  15; // D8 (was D3, but it always goes high by itself)
 const int avail5ActivePin =  16; // D0 (not connected)
 
 void setup() {
