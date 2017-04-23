@@ -30,6 +30,9 @@ DeviceAddress FurnaceReturn = {0x28, 0xFF, 0x32, 0x7A, 0x90, 0x15, 0x01, 0x99};
 DeviceAddress Room = {0x28, 0xFF, 0x6C, 0x50, 0x90, 0x15, 0x01, 0xC5};
 DeviceAddress Arduino = {0x28, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xA2};
 
+DeviceAddress HeatingForward = {0x28, 0xCD, 0x2D, 0xE1, 0x08, 0x00, 0x00, 0x3C};
+DeviceAddress HeatingReturn = {0x28, 0x4F, 0x12, 0xC9, 0x08, 0x00, 0x00, 0x3F};
+
 // https://github.com/esp8266/Arduino/issues/584#issuecomment-123715951
 const int furnaceActivePin = 13;  // D7
 const int solarPumpActivePin = 12; // D6
@@ -120,7 +123,9 @@ void loop() {
   sendDataToInflux("TankMiddle", (String) readSensor(TankMiddle), false);
   sendDataToInflux("TankBottom", (String) readSensor(TankBottom), false);
   sendDataToInflux("FurnaceForward", (String) readSensor(FurnaceForward), false);
-  sendDataToInflux("FurnaceReturn", (String) readSensor(FurnaceReturn), true);
+  sendDataToInflux("FurnaceReturn", (String) readSensor(FurnaceReturn), false);
+  sendDataToInflux("HeatingForward", (String) readSensor(HeatingForward), false);
+  sendDataToInflux("HeatingReturn", (String) readSensor(HeatingReturn), true);
 
   Serial.println("");
 
